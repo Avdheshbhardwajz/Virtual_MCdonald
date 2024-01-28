@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mcdonald</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap");
+
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+      body {
+        margin: 0px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(255, 255, 255);
+        height: 100vh;
+        width: 100vw;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid black;
+        border-radius: 20px;
+        padding: 10%;
+        text-align: center;
+        gap: 10%;
+      }
+
+      .orderFood {
+        padding: 10px 15px;
+        background-color: brown;
+      }
+      select {
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      /* Style the options within the select */
+      option {
+        padding: 12px;
+      }
+      img {
+        width: 20%;
+        margin: 0px auto;
+      }
+      a {
+        font-family: "poppins";
+        text-decoration: none;
+        color: aliceblue;
+      }
+      .loader img {
+        display: none;
+      }
+      h1,
+      h3 {
+        font-family: "poppins";
+        font-weight: 300;
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- // Instructions
+    // Promises
+    // Level: 1
+    // Type: applied
+    // Avg Duration: 3 Hrs
+    // Problem Statement :-
+    // You have recently taken a McDonald’s franchise. You, being a software developer, want to design a virtual food ordering system to handle the orders coming in. Users should be able to place orders through it. Whenever one order is complete, it should be visible on the screen with the order number.
+    
+    // Description :-
+    // Create a button called 'Order Food'. Create a checkbox of multiple food items you can choose from.
+    // When a user clicks on order food, create a promise that will resolve after random seconds.
+    // Once the promise is resolved, show the image of the food in the centre and show the order id on the top right corner.
+    // Try to make your virtual restaurant as real as possible.
+ -->
+
+    <div class="container">
+      <h1>What Would You Like To Eat Today?</h1>
+
+      <div class="loader">
+        <img src="Bean Eater-1s-200px.svg" alt="" />
+      </div>
+
+      <img
+        id="mainimg"
+        src="https://www.pngmart.com/files/16/Master-Chef-Vector-Transparent-PNG.png"
+        alt="image"
+      />
+      <br />
+      <label for="menu">Choose Your Order:</label>
+      <select id="menu">
+        <option value="" disabled selected>Choose food item</option>
+        <option value="Pizza">Pizza</option>
+        <option value="Burger">Burger</option>
+        <option value="Pastry">Pastry</option>
+      </select>
+      <a href="#" class="orderFood">ORDER</a>
+    </div>
+
+    <script>
+      // let foodbtn = document.querySelector(".orderFood");
+      // foodbtn.addEventListener("click", function () {
+      //   orderFood()
+      //     .then((value) => {
+      //       alert(value);
+      //     })
+      //     .catch((value) => {
+      //       alert(value);
+      //     });
+      // });
+      // function orderFood() {
+      //   return new Promise(function (resolve, reject) {
+      //     setTimeout(function () {
+      //       let selectedValue = document.getElementById("menu").value;
+      //       if (selectedValue == "Pizza") {
+      //         document.getElementById("mainimg").src = "pizza.png";
+      //         resolve("Your Food is Ready");
+      //       } else if (selectedValue == "Burger") {
+      //         document.getElementById("mainimg").src = "burger.png";
+      //         resolve("Your Food is Ready");
+      //       } else if (selectedValue == "Pastry") {
+      //         document.getElementById("mainimg").src = "lava-cake.png";
+      //         resolve("Your Food is Ready");
+      //       } else {
+      //         reject("Chef is not Available");
+      //       }
+      //     }, 5000);
+      //   });
+      // }
+
+      let heading = document.querySelector("h1");
+      function showLoader() {
+        document.querySelector(".loader img").style.display = "block";
+        document.getElementById("mainimg").style.display = "none";
+      }
+
+      function hideLoader() {
+        document.querySelector(".loader img").style.display = "none";
+        document.getElementById("mainimg").style.display = "block";
+      }
+
+      let foodbtn = document.querySelector(".orderFood");
+      foodbtn.addEventListener("click", function () {
+        showLoader();
+        orderFood()
+          .then((value) => {
+            heading.innerHTML = `<h3>Your Order id is ${value}</h3>`;
+          })
+          .catch((value) => {
+            heading.innerHTML = `<h3>Your Order id is ${value}</h3>`;
+          });
+      });
+
+      function orderFood() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            let selectedValue = document.getElementById("menu").value;
+            if (selectedValue == "Pizza") {
+              hideLoader();
+              document.getElementById("mainimg").src = "pizza.png";
+              resolve("0000232");
+            } else if (selectedValue == "Burger") {
+              hideLoader();
+              document.getElementById("mainimg").src = "burger.png";
+              resolve("0000233");
+            } else if (selectedValue == "Pastry") {
+              hideLoader();
+              document.getElementById("mainimg").src = "lava-cake.png";
+              resolve("0000234");
+            } else {
+              hideLoader();
+              reject("select Food Please or maybe food not available ");
+            }
+          }, 5000);
+        });
+      }
+    </script>
+  </body>
+</html>
